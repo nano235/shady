@@ -1,0 +1,40 @@
+@import "@/styles/imports";
+
+.section {
+	max-width: $max-width;
+	margin-inline: auto;
+	padding: 5rem 7rem;
+	.title {
+		font-weight: 700;
+		font-size: 4.8rem;
+		line-height: 4.8rem;
+		margin-bottom: 2.3rem;
+		letter-spacing: 0.001rem;
+	}
+	h2 {
+		font-weight: 700;
+		font-size: 4rem;
+		margin-bottom: 3rem;
+	}
+	p {
+		color: rgba(255, 255, 255, 0.5);
+		font-size: 1.6rem;
+		margin-block: 2rem;
+	}
+	img {
+		margin-block: 2rem;
+	}
+	@include screenMax("mobile") {
+		padding-inline: 1.6rem;
+		.grid {
+			grid-template-columns: 100%;
+		}
+		.title {
+			font-size: 2.4rem;
+			margin-bottom: 1.2rem;
+		}
+		img {
+			min-height: 10rem;
+		}
+	}
+}

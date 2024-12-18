@@ -1,0 +1,119 @@
+@import "@/styles/imports";
+
+.footer {
+	background-color: $col-white;
+	.container {
+		padding: 3rem 7rem 5.5rem;
+		width: 100%;
+		max-width: $max-width;
+		margin-inline: auto;
+		@include flex(space-between, center);
+		.flex_row {
+			@include flex(space-between, flex-end);
+			gap: 5rem;
+			.list {
+				.text {
+					margin-bottom: 1.5rem;
+				}
+				ul {
+					@include flex(flex-start, flex-start, column);
+					gap: 2rem;
+					li {
+						a,
+						p {
+							@extend %text-16;
+							font-weight: 500;
+							color: black;
+							cursor: pointer;
+						}
+					}
+				}
+			}
+		}
+		.text,
+		.title {
+			h1,
+			span {
+				font-size: 6rem;
+				line-height: 7rem;
+				font-weight: 600;
+				color: #101828;
+			}
+			span {
+				color: #667085;
+			}
+			h6 {
+				color: #7e8492;
+				@extend %text-12;
+				font-weight: 500;
+			}
+			a {
+				@extend %text-14;
+				font-weight: 400;
+				color: #667085;
+			}
+		}
+		.grid_row {
+			.icons {
+				@include grid(repeat(9, 1.5rem), 2rem);
+				.icon {
+					width: 100%;
+					height: 1.5rem;
+				}
+			}
+		}
+
+		.row {
+			width: 100%;
+			margin-top: 4rem;
+			@include flex(space-between, flex-end);
+			.logo {
+				margin-bottom: 1.5rem;
+			}
+		}
+	}
+	@include screenMax("mobile") {
+		.container {
+			padding-inline: 1.6rem;
+			.block {
+				width: 100%;
+			}
+			.title {
+				width: 100%;
+				@include flex(flex-start, center);
+				gap: 0.6rem;
+				h1,
+				span {
+					font-size: 2rem;
+					line-height: 2.4rem;
+				}
+			}
+			.flex_row {
+				margin-top: 2.5rem;
+				width: 100%;
+				.list {
+					ul {
+						gap: 1.5rem;
+						li {
+							a,
+							p {
+								font-size: 1.6rem;
+								line-height: 2.4rem;
+							}
+						}
+					}
+				}
+			}
+			.row {
+				.block {
+					width: auto;
+				}
+				.grid_row {
+					.icons {
+						grid-template-columns: repeat(5, 1.5rem);
+					}
+				}
+			}
+		}
+	}
+}

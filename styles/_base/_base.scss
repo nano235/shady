@@ -1,0 +1,51 @@
+* {
+	outline: none;
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-decoration: none;
+}
+
+html {
+	font-size: calc(100vw / 1440 * 10);
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	@include noScrollBar();
+	// @include flex(stretch, stretch, column);
+	@media screen and (min-width: 1441px) {
+		font-size: 10px;
+	}
+	@include screenMax("tablet") {
+		font-size: calc(100vw / 1025 * 10);
+	}
+	@include screenMax("mobile") {
+		font-size: calc(100vw / 450 * 10);
+	}
+	// @include screenMax("ssm-mobile") {
+	// 	font-size: calc(100vw / 380 * 10);
+	// }
+}
+
+body {
+	line-height: 1;
+	// flex-grow: 1;
+	margin: 0;
+	padding: 1rem;
+	// overflow-x: hidden;
+	scroll-behavior: smooth;
+	font-family: $font;
+	color: $col-white;
+	background-color: $col-black;
+	position: relative;
+	@include screenMax("mobile") {
+		padding: 0;
+	}
+}
+
+#__next {
+	flex-grow: 1;
+
+	// @include flex(stretch, stretch, column);
+}

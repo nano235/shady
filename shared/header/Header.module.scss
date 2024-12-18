@@ -1,0 +1,206 @@
+@import "@/styles/imports";
+
+.header {
+	width: 100%;
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background-color: #000;
+	border-bottom: 0.1rem solid rgba(#fff, 0.05);
+	.container {
+		padding: 2.4rem 8rem;
+		background-color: $col-black;
+		@include flex(space-between, center);
+		max-width: $max-width;
+		margin-inline: auto;
+		.logo_container {
+			@include flex(flex-start, center);
+			width: 100%;
+			gap: 1rem;
+
+			.text {
+				background-color: rgba(#000, 0.03);
+				border-radius: 0.7rem;
+				padding: 0.4rem 0.6rem;
+				p {
+					@extend %text-12;
+					font-weight: 700;
+				}
+			}
+			.button {
+				margin-left: auto;
+			}
+		}
+		.row {
+			@include flex(flex-start, center);
+			gap: 2.4rem;
+			.button {
+				border-radius: 1.2rem;
+			}
+			.icon_button {
+				position: relative;
+				width: 2.4rem;
+				height: 2.4rem;
+				.icon {
+					width: 1.8rem;
+					height: 1.8rem;
+				}
+			}
+			.avatar_button {
+				position: relative;
+				width: 4.8rem;
+				height: 4.8rem;
+				border-radius: 50%;
+			}
+		}
+		.header_nav {
+			min-width: 35%;
+			.header_navList {
+				@include flex(space-between, center, nowrap);
+				gap: 4rem;
+				padding: 0;
+				margin: 0;
+				.header_navLink {
+					// padding: 1rem 2.5rem;
+					a,
+					p {
+						@extend %text-16;
+						transition: $all-transition;
+						color: rgba(#fff, 0.2);
+						font-weight: 500;
+						cursor: pointer;
+						&:hover {
+							color: #fff;
+						}
+					}
+					@include screenMax("mobile") {
+						@include flex(flex-end, center, nowrap);
+					}
+					&[data-active="true"] {
+						a {
+							color: #fff;
+						}
+					}
+				}
+			}
+		}
+
+		.header_hamburger,
+		.header_hamburger__open {
+			display: none;
+			position: relative;
+			cursor: pointer;
+			height: fit-content;
+			width: 7rem;
+			height: 4rem;
+			padding: 0;
+			.hamburger_container {
+				&Bar {
+					width: 35px;
+					height: 2px;
+					background-color: #fff;
+					margin: 0.4rem 0;
+					width: 35px;
+					opacity: 0.8;
+					transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+					&:nth-child(2) {
+						width: 30px;
+					}
+				}
+			}
+			@include screenMax("mobile") {
+				order: 2;
+				// margin-left: auto;
+				display: flex;
+				.hamburger_container {
+					@include flex(center, flex-end, column nowrap);
+				}
+			}
+		}
+
+		.header_wrapper,
+		.header_wrapper__collapsed {
+			width: 100%;
+			// flex-grow: 1;
+			transition: transform 0.3s ease-out;
+			@include flex(space-between, center);
+
+			@include screenMax("mobile") {
+				order: 3;
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				top: 7rem;
+				left: 0;
+				background-color: #000;
+				z-index: 10;
+				padding: 4rem 7%;
+				margin-left: 0;
+				transform: translateX(0);
+				@include flex(flex-start, flex-end, column);
+			}
+		}
+
+		.header_wrapper__collapsed {
+			@include screenMax("mobile") {
+				transform: translateX(101vw);
+			}
+		}
+
+		.header_hamburger__open {
+			min-height: 10px;
+			position: relative;
+			.hamburger_container {
+				.hamburger_containerBar {
+					width: 20px;
+				}
+
+				.hamburger_containerBar:first-child {
+					margin-bottom: -1px;
+					transform: rotate(45deg);
+				}
+
+				.hamburger_containerBar:last-child {
+					margin-top: -1px;
+					transform: rotate(-45deg);
+				}
+			}
+		}
+	}
+	@include screenMax("mobile") {
+		padding-inline: 0;
+		.container {
+			padding-inline: 1.6rem;
+			.scroll_container {
+				display: grid;
+			}
+			.logo_container {
+				width: auto;
+				.text {
+					display: none;
+				}
+			}
+			.header_nav {
+				.header_navList {
+					display: block;
+					padding: 0;
+					margin: 0;
+					.header_navLink {
+						padding: 2rem;
+						a,
+						p {
+							font-size: 2rem;
+							font-weight: 600;
+							transition: $all-transition;
+							color: rgba(93, 94, 103, 1);
+						}
+					}
+				}
+			}
+		}
+		.icon_button {
+			display: none;
+		}
+	}
+}

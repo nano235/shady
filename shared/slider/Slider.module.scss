@@ -1,0 +1,38 @@
+@import "@/styles/imports";
+
+.section {
+	margin-top: 10rem;
+	padding-bottom: 5rem;
+	.title {
+		max-width: $max-width;
+		margin-inline: auto;
+		margin-bottom: 5rem;
+	}
+	.container {
+		// overflow: hidden;
+		width: 100%;
+		position: relative;
+		.slide {
+			width: 15.2rem;
+			@include flex(center, center);
+			flex: 0 0 auto;
+			background-color: rgba(#fff, 0.05);
+			border: 0.1rem solid rgba(#fff, 0.05);
+			height: 6rem;
+			position: relative;
+		}
+		// &:hover {
+		// 	animation-play-state: paused;
+		// }
+	}
+}
+
+@keyframes swipe {
+	0% {
+		transform: translate(0);
+	}
+
+	100% {
+		transform: translate(-400%);
+	}
+}

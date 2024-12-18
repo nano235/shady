@@ -1,0 +1,48 @@
+%btn {
+	all: unset;
+	transition: all 0.2s ease-out;
+	outline: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 400;
+	font-size: 1.6rem;
+	background-color: transparent;
+	position: relative;
+
+	&:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+	@include screenMax("mobile") {
+		padding: 1.2rem 2.4rem;
+	}
+}
+
+%btn-primary {
+	@extend %btn;
+
+	&:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+}
+
+%btn-secondary {
+	@extend %btn;
+	background-color: #fff;
+	border-radius: 10rem;
+	border: 0.1rem solid #ededed;
+	padding: 1.4rem 2rem;
+	color: #0a0a0b;
+	font-size: 1.6rem;
+	line-height: 2.6rem;
+	font-weight: 700;
+	width: 100%;
+}
+%btn-transparent {
+	@extend %btn;
+	background-color: transparent;
+	border-color: transparent;
+}

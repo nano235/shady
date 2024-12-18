@@ -1,0 +1,20 @@
+@import "@/styles/imports";
+
+.section {
+	max-width: $max-width;
+	margin-inline: auto;
+	padding: 5rem 7rem;
+	.row {
+		@include flex(space-between, center);
+	}
+	.grid {
+		@include grid(repeat(4, 1fr), 1rem, 1rem);
+		margin-top: 5rem;
+	}
+	@include screenMax("mobile") {
+		padding-inline: 1.6rem;
+		.grid {
+			grid-template-columns: 100%;
+		}
+	}
+}
