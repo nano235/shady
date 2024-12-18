@@ -1,10 +1,11 @@
 import React from "react";
 import styles from "./Hero.module.scss";
 import { CustomLink, ShotCard } from "@/shared";
-import { projects } from "@/mock/projects.mock";
 import { Project } from "@/interfaces";
+import { useAppSelector } from "@/store/configureStore";
 
 const Hero = () => {
+	const shots = useAppSelector(s => s.shots);
 	return (
 		<section className={styles.hero}>
 			<div className={styles.text}>
@@ -18,11 +19,11 @@ const Hero = () => {
 				Explore projects
 			</CustomLink>
 			<div className={styles.grid}>
-				{projects.slice(0, 8).map((project: Project, index: number) => (
+				{shots.slice(0, 8).map((project: Project, index: number) => (
 					<ShotCard
 						key={index}
 						project={project}
-						projects={projects}
+						projects={shots}
 						index={index}
 					/>
 				))}
