@@ -4,12 +4,14 @@ import { Hero } from "@/components";
 import { useDribbleShots } from "@/hooks/useDribbleShots";
 import { clients } from "@/mock/clients.mock";
 import { Slider } from "@/shared";
-import React from "react";
+import React, { useEffect } from "react";
 
 const HomeView = () => {
 	const { fetchDribbbleShots } = useDribbleShots();
 
-	fetchDribbbleShots();
+	useEffect(() => {
+		fetchDribbbleShots();
+	}, []);
 	return (
 		<>
 			<Hero />

@@ -17,7 +17,7 @@ const ShotsView = () => {
 
 	useEffect(() => {
 		fetchDribbbleShots();
-	}, [fetchDribbbleShots]);
+	}, []);
 
 	const currentTableData = useMemo(() => {
 		const firstPageIndex = (currentPage - 1) * pageSize;
