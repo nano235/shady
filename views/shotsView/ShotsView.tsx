@@ -4,7 +4,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import styles from "./Shots.module.scss";
 // import { projects } from "@/mock/projects.mock";
 import { Pagination, ShotCard } from "@/shared";
-import { Project } from "@/interfaces";
 import { useDribbleShots } from "@/hooks/useDribbleShots";
 import { useAppSelector } from "@/store/configureStore";
 import { Shot } from "@/store/slices/shotsSlice";
