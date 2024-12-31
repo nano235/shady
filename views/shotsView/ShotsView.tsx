@@ -1,58 +1,68 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styles from "./Shots.module.scss";
-// import { projects } from "@/mock/projects.mock";
-import { Pagination, ShotCard } from "@/shared";
+import { ShotCard } from "@/shared";
 import { useDribbleShots } from "@/hooks/useDribbleShots";
-import { useAppSelector } from "@/store/configureStore";
-import { Shot } from "@/store/slices/shotsSlice";
-
-const pageSize = 16;
+import { useAppDispatch, useAppSelector } from "@/store/configureStore";
+import { Shot, appendShots } from "@/store/slices/shotsSlice";
 
 const ShotsView = () => {
-	const [currentPage, setCurrentPage] = useState<number>(1);
-	const shots = useAppSelector(s => s.shots);
-	const { fetchDribbbleShots } = useDribbleShots();
+  const shots = useAppSelector((state) => state.shots.displayedShots); // Shots to display (first 20, then more)
+  const hasMore = useAppSelector((state) => state.shots.hasMore); // Check if there are more shots to load
+  const { fetchDribbbleShots } = useDribbleShots();
+  const dispatch = useAppDispatch();
 
-	useEffect(() => {
-		fetchDribbbleShots();
-	}, []);
+  const [loading, setLoading] = useState(false); // Track loading state
 
-	const currentTableData = useMemo(() => {
-		const firstPageIndex = (currentPage - 1) * pageSize;
-		const lastPageIndex = firstPageIndex + pageSize;
-		return shots.slice(firstPageIndex, lastPageIndex);
-	}, [currentPage, shots]);
+  // Fetch more shots when user scrolls
+  const handleFetchMore = async () => {
+    if (loading || !hasMore) return; // Prevent multiple requests while loading or when no more shots
 
-	const startNumber = (currentPage - 1) * pageSize + 1;
+    setLoading(true);
+    // Append 20 more shots to the display
+    dispatch(appendShots());
+    setLoading(false);
+  };
 
-	const endNumber = Math.min(startNumber + currentTableData.length - 1, shots.length);
-	return (
-		<section className={styles.section}>
-			<div className={styles.row}>
-				<p>Shots</p>
-				<Pagination
-					currentPage={currentPage}
-					totalCount={shots.length}
-					pageSize={pageSize}
-					onPageChange={(page: number) => setCurrentPage(page)}
-					startNumber={startNumber}
-					endNumber={endNumber}
-				/>
-			</div>
-			<div className={styles.grid}>
-				{currentTableData.map((project: Shot, index: number) => (
-					<ShotCard
-						key={index}
-						project={project}
-						projects={shots}
-						index={index}
-					/>
-				))}
-			</div>
-		</section>
-	);
+  // Scroll event handler to trigger fetching more shots when the user reaches the bottom
+  const handleScroll = useCallback(() => {
+    const bottom =
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight;
+    if (bottom) {
+      handleFetchMore(); // Fetch more shots if scrolled to the bottom
+    }
+  }, [loading, hasMore]);
+
+  // Fetch all shots once on initial mount
+  useEffect(()=> {
+	fetchDribbbleShots();
+  },[])
+  useEffect(() => {
+    
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup the scroll event listener
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [handleScroll, fetchDribbbleShots]);
+
+  return (
+    <section className={styles.section}>
+      <div className={styles.row}>
+        <p>Shots</p>
+      </div>
+      <div className={styles.grid}>
+        {shots.map((shot: Shot, index: number) => (
+          <ShotCard projects={shots} key={shot.id} project={shot} index={index} />
+        ))}
+      </div>
+      {loading && <p>Loading...</p>}
+      {!hasMore && <p>No more shots to load</p>}
+    </section>
+  );
 };
 
 export default ShotsView;
