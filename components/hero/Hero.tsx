@@ -5,7 +5,7 @@ import { Project } from "@/interfaces";
 import { useAppSelector } from "@/store/configureStore";
 
 const Hero = () => {
-	const shots = useAppSelector(s => s.shots);
+	const shots = useAppSelector(s => s.shots.displayedShots);
 	return (
 		<section className={styles.hero}>
 			<div className={styles.text}>
